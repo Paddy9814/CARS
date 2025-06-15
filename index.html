@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CARS</title>
+
+    <!-- A-Frame 0.8.0 -->
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+
+    <!-- AR.js für A-Frame -->
+    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.2/aframe/build/aframe-ar.min.js"></script>
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+    <a-scene embedded arjs="sourceType: webcam;">
+      
+      <!-- Marker: Dein .patt-Datei muss vorhanden sein -->
+      <a-marker type="pattern" url="pattern95.patt">
+        <!-- Schwarzer Würfel -->
+        <a-box position="0 0.5 0" depth="1" height="1" width="1" color="#000000"></a-box>
+      </a-marker>
+
+      <!-- Kamera -->
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <!-- Optional: Link zum Marker anzeigen -->
+    <div style="position: absolute; top: 10px; left: 10px; background: white; padding: 5px;">
+      <a href="pattern95.png" target="_blank">Marker anzeigen</a>
+    </div>
+  </body>
+</html>
