@@ -79,26 +79,31 @@ document.addEventListener('DOMContentLoaded', () => {
       // Hintergrund wechseln, wenn btn1 (Blitz) geklickt wird
       if (id === 'btn1') {
         sky.setAttribute('src', 'szeneende.PNG');
+        sky.setAttribute('rotation', '0 210 0');
       }
 
       // Hintergrund wechseln, wenn btn2 (Chief) geklickt wird
       if (id === 'btn2') {
         sky.setAttribute('src', 'szenecanyon.jpg');
+        sky.setAttribute('rotation', '0 90 0');
       }
 
       // Hintergrund wechseln, wenn btn3 (Guido) geklickt wird
       if (id === 'btn3') {
         sky.setAttribute('src', 'szeneroadtrip.jpg');
+        sky.setAttribute('rotation', '0 90 0');
       }
 
       // Hintergrund wechseln, wenn btn4 (waschen) geklickt wird
       if (id === 'btn4') {
         sky.setAttribute('src', 'szenetanken.JPG');
+        sky.setAttribute('rotation', '0 0 0');
       }
 
       // Hintergrund wechseln, wenn btn5 (Öl) geklickt wird
       if (id === 'btn5') {
         sky.setAttribute('src', 'szeneende.PNG');
+        sky.setAttribute('rotation', '0 90 0');
       }
 
       currentStep++;
@@ -113,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
       flashColor(buttons[id], 'red', 300);
     }
   }
-
 
   // Event Listener für alle Buttons
   Object.keys(buttons).forEach(id => {
@@ -161,18 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function showFailScreen() {
-    // Startscreen anzeigen mit "verloren"-Nachricht und Buttontext
-    startScreen.setAttribute('visible', 'true');
+  resetToStartState();
 
-    const failText = document.querySelector('#startScreenText');
-    failText.setAttribute('value', "Zeit abgelaufen! Du hast es nicht rechtzeitig zum Rennen geschafft.");
+  // Text anpassen für Fehlversuch
+  const failText = document.querySelector('#startScreenText');
+  failText.setAttribute('value', "Zeit abgelaufen! Du hast es nicht rechtzeitig zum Rennen geschafft.");
 
-    const startButtonText = document.querySelector('#startButtonText');
-    startButtonText.setAttribute('value', "Versuche es erneut");
+  const startButtonText = document.querySelector('#startButtonText');
+  startButtonText.setAttribute('value', "Versuche es erneut");
+}
 
-    // Reset Spiel
-    currentStep = 0;
-  }
 
   startButton.addEventListener('click', () => {
     music.play();
@@ -187,5 +189,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const startButtonText = document.querySelector('#startButtonText');
     startButtonText.setAttribute('value', "Start");
   });
+
+  function resetToStartState() {
+  // Timer stoppen und Text ausblenden
+  clearInterval(timerInterval);
+  timerText.setAttribute('visible', 'false');
+
+  // Aktuellen Schritt zurücksetzen
+  currentStep = 0;
+
+  // McQueen-Bild und Hintergrundbild zurücksetzen
+  const sky = document.querySelector('#straße');
+  sky.setAttribute('src', 'szenestart.jpg'); // Dein Startbild
+  sky.setAttribute('rotation', '0 230 0');
+
+  carImage.setAttribute('src', 'Start.png'); // Dein Startbild von McQueen
+
+  // Startbildschirm wieder anzeigen
+  startScreen.setAttribute('visible', 'true');
+
+  // Text & Button auf Anfang setzen
+  const failText = document.querySelector('#startScreenText');
+  failText.setAttribute('value', "Willkommen beim Lightning McQueen Roadtrip!\nHilf McQueen durch verschiedene Aufgaben.\nKlicke auf die richtigen Freunde, um ihn zu unterstützen!");
+
+  const startButtonText = document.querySelector('#startButtonText');
+  startButtonText.setAttribute('value', "Start");
+}
 
 });
